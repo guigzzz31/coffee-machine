@@ -1,12 +1,9 @@
 import Fastify from "fastify";
 
-import { makeAFightBetweenCharacterAndOpponent } from "./makeAFightBetweenCharacterAndOpponent.ts";
-
-import { forLaunchingADice } from "./forLaunchingADice.ts";
-import {
-  forPickingTheOpponent,
-  forRetrievingTheCharacter,
-} from "./characterRepository.ts";
+import { forRetrievingTheDrink } from "./secondary_adapters/drinkRepository.ts";
+import { makeAnOrderToCoffeeMachine } from "./makeAnOrderToCoffeeMachine.ts";
+import { forComputingOrderToInstruction } from "./secondary_adapters/forComputingOrderToInstruction.ts";
+import { forMakingDrink } from "./secondary_adapters/forMakingDrink.ts";
 
 const fastify = Fastify({
   logger: true,
@@ -16,20 +13,20 @@ fastify.get("/", async function handler(request, reply) {
   return { hello: "port & adapters" };
 });
 
-fastify.post<{ Body: { characterId: string; opponentId: string } }>(
-  "/fight",
+fastify.post<{ Body: { drink: string; sugar: number } }>(
+  "/order",
   async function handler(request, reply) {
-    const { characterId, opponentId } = request.body;
+    const { drink, sugar } = request.body;
 
-    const makeAFightInitialized = makeAFightBetweenCharacterAndOpponent(
-      forRetrievingTheCharacter,
-      forPickingTheOpponent,
-      forLaunchingADice
+    const makeAnOrderInitialized = makeAnOrderToCoffeeMachine(
+      forRetrievingTheDrink,
+      forComputingOrderToInstruction,
+      forMakingDrink
     );
 
-    const result = await makeAFightInitialized(characterId, opponentId);
+    const result = makeAnOrderInitialized(drink, sugar);
 
-    return { winner: result };
+    return { order: result };
   }
 );
 
