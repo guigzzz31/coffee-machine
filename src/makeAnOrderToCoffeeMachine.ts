@@ -3,6 +3,7 @@ export type DrinkName = "tea" | "coffee" | "chocolate";
 export type Drink = {
   id: string;
   name: string;
+  price: number;
 };
 
 export type Order = {
