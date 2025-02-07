@@ -1,3 +1,5 @@
+import { Drink } from "../makeAnOrderToCoffeeMachine";
+
 const drinks = [
   {
     id: "T",
@@ -13,7 +15,7 @@ const drinks = [
   },
 ];
 
-export const forRetrievingTheDrink = (name: string): string => {
+export const forRetrievingTheDrink = (name: string): Drink => {
   const [drink] = drinks.filter((drink) => drink.name === name);
-  return drink.id;
+  return drink;
 };

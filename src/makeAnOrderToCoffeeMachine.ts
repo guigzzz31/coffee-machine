@@ -12,11 +12,13 @@ export type Order = {
 };
 
 // Secondary Ports
-export type ForRetrievingDrinkInMemory = (name: string) => string;
+export type ForRetrievingDrinkInMemory = (name: string) => Drink;
+
 export type ForComputingOrderToInstruction = (
   drinkId: string,
   sugar: number
 ) => string;
+
 export type ForMakingTheDrink = (
   instruction: string,
   drinkName: string
@@ -32,9 +34,9 @@ export type IMakeAnOrderToCoffeeMachine = (
 export const makeAnOrderToCoffeeMachine: IMakeAnOrderToCoffeeMachine =
   (forRetrievingTheDrink, forComputingOrderToInstruction, forMakingDrink) =>
   (drinkName: string, sugar: number) => {
-    const drinkId = forRetrievingTheDrink(drinkName);
-    const instruction = forComputingOrderToInstruction(drinkId, sugar);
-    const drink = forMakingDrink(instruction, drinkName);
+    const { id, name } = forRetrievingTheDrink(drinkName);
+    const instruction = forComputingOrderToInstruction(id, sugar);
+    const drink = forMakingDrink(instruction, name);
 
     return drink;
   };
