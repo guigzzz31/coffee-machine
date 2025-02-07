@@ -84,7 +84,7 @@ curl http://localhost:3000
 curl \
 -H 'Content-Type: application/json' \
 -X POST \
--d '{ "drink": "coffee", "sugar": "2" }' \
+-d '{ "drink": "coffee", "sugar": 2 }' \
 http://localhost:3000/order
 
 > {"order":"Drink maker makes 1 coffee with 2 sugars and a stick"}
