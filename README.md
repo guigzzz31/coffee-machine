@@ -84,10 +84,10 @@ curl http://localhost:3000
 curl \
 -H 'Content-Type: application/json' \
 -X POST \
--d '{ "characterId": "char", "opponentId": "opp" }' \
-http://localhost:3000/fight
+-d '{ "drink": "coffee", "sugar": "2" }' \
+http://localhost:3000/order
 
-> {"winner":"Chewbacca the Wookie wins"}
+> {"order":"Drink maker makes 1 coffee with 2 sugars and a stick"}
 ```
 
 ### Step 3: Test-to-Real https://github.com/Maeevick/hexa-how-to/tree/103327e67308beb119f1afc5bd193dae1870f577
